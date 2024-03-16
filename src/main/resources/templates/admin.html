@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+
+    <meta charset="UTF-8">
+    <title>Patients List</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+          integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8sh+Wy0B/QjNVAMFpdDnj8d9C4P6U+AizdA"
+          crossorigin="anonymous">
+    <!-- Your custom CSS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <style>
+        .table {
+            margin-top: 20px;
+        }
+
+        th, td {
+            text-align: center;
+        }
+        td{
+            background-color: white;
+        }
+        body{
+            background-image: url("https://img.freepik.com/free-photo/medicine-blue-background-flat-lay_23-2149341573.jpg");
+            background-size: cover;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2 class="mt-5">Patients List</h2>
+
+    <!-- Check if the patient list is not empty -->
+    <th:block th:if="${not #lists.isEmpty(patients)}">
+        <table class="table table-bordered table-hover">
+            <thead class="table-dark">
+            <tr>
+                <th>Username</th>
+                <th>Password</th>
+                <th>Name</th>
+                <th>Age</th>
+                <th>Mobile Number</th>
+                <th>Remark</th>
+            </tr>
+            </thead>
+            <tbody class="table-info">
+            <!-- Iterate over the list of patients -->
+            <th:each var="patient" th:each="patient : ${patients}">
+                <tr>
+                    <td th:text="${patient.userName}"></td>
+                    <td th:text="${patient.password}"></td>
+                    <td th:text="${patient.patientName}"></td>
+                    <td th:text="${patient.age}"></td>
+                    <td th:text="${patient.mobileNumber}"></td>
+                    <td th:text="${patient.patientRemark}"></td>
+                </tr>
+            </th:each>
+            </tbody>
+        </table>
+    </th:block>
+
+    <!-- Show a message if the patient list is empty -->
+    <div th:if="${#lists.isEmpty(patients)}">
+        <p>No patients found.</p>
+    </div>
+</div>
+
+<!-- Bootstrap JS and dependencies (include at the end of the body for better performance) -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"
+        integrity="sha384-X4Y5aJ/z2YgWkh5rQLJMpYwmeR89TkUk3EnX0IdmCqQ8rgVZ7rVjflCk8aQrNrOd"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+        integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8sh+Wy0B/QjNVAMFpdDnj8d9C4P6U+AizdA"
+        crossorigin="anonymous"></script>
+
+</body>
+</html>

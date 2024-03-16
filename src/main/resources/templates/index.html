@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Login Form</title>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <!-- Link to Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Custom CSS -->
+    <style>
+        .btn-12,
+        .btn-12 *,
+        .btn-12 :after,
+        .btn-12 :before,
+        .btn-12:after,
+        .btn-12:before {
+            border: 0 solid;
+            box-sizing: border-box;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+
+        }
+
+        .btn-12 {
+            -webkit-tap-highlight-color: transparent;
+            -webkit-appearance: button;
+            background-color: #000;
+            background-image: none;
+            color: #fff;
+            cursor: pointer;
+            font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+            Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif,
+            Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
+            font-size: 100%;
+            font-weight: 900;
+            line-height: 1.5;
+            margin: 0;
+            -webkit-mask-image: -webkit-radial-gradient(#000, #fff);
+            padding: 0;
+            text-transform: uppercase;
+        }
+
+        .btn-12:disabled {
+            cursor: default;
+        }
+
+        .btn-12:-moz-focusring {
+            outline: auto;
+        }
+
+        .btn-12 svg {
+            display: block;
+            vertical-align: middle;
+        }
+
+        .btn-12 [hidden] {
+            display: none;
+        }
+
+        .btn-12 {
+            border-radius: 99rem;
+            border-width: 2px;
+            overflow: hidden;
+            padding: 0.8rem 3rem;
+            position: relative;
+            left: 35%;
+        }
+
+        .btn-12 span {
+            mix-blend-mode: difference;
+        }
+
+        .btn-12:after,
+        .btn-12:before {
+            background: linear-gradient(
+                    90deg,
+                    #fff 25%,
+                    transparent 0,
+                    transparent 50%,
+                    #fff 0,
+                    #fff 75%,
+                    transparent 0
+            );
+            content: "LOGIN";
+            text-align: center;
+            inset: 0;
+            position: absolute;
+            transform: translateY(var(--progress, 100%));
+            transition: transform 0.2s ease;
+        }
+
+        .btn-12:after {
+            --progress: -100%;
+            background: linear-gradient(
+                    90deg,
+                    transparent 0,
+                    transparent 25%,
+                    #fff 0,
+                    #fff 50%,
+                    transparent 0,
+                    transparent 75%,
+                    #fff 0
+            );
+
+            z-index: -1;
+        }
+
+        .btn-12:hover:after,
+        .btn-12:hover:before {
+
+            --progress: 0;
+            color: black;
+            background-color: white;
+            margin-top: 1rem;
+        }
+
+        body {
+            color: white;
+            background-color: #f8f9fa;
+        }
+        label,p{
+            color: black;
+        }
+
+        body {
+            background-image: url('https://img.freepik.com/free-psd/interior-modern-emergency-room-with-empty-nurses-station-generative-ai_587448-2137.jpg?w=1060&t=st=1707314071~exp=1707314671~hmac=355a66bc5c8c04e5ec3604eb330198e01011c9395f0b344a8f54730c5b474df9');
+            background-size: cover; /* Adjust as needed */
+            background-repeat: no-repeat;
+            background-attachment: fixed; /* Fixed background */
+            /* Add other styles if needed */
+        }
+        .container {
+            margin-top: 50px;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        form {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        .btn {
+            margin-top: 15px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <!-- Login Form -->
+        <div class="col-md-6 mx-auto">
+
+            <h1>Login</h1>
+            <div th:if="${param.error}">
+                <div class="alert alert-danger">Invalid username or
+                    password.</div>
+            </div>
+
+            <div th:if="${param.success}">
+                <div class="alert alert-info">You've successfully registered
+                    to our awesome app!</div>
+            </div>
+            <form th:action="@{/signin}" th:object="${patient}" method="POST">
+
+                <div class="form-group">
+                    <label for="userName">User Name:</label>
+                    <input type="text" id="userName" th:field="*{userName}" name="userName" class="form-control" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" th:field="*{password}" name="password" class="form-control" required>
+                </div>
+
+                <button type="submit" class="btn-12">Login</button>
+                <!-- Registration link -->
+                <p class="mt-3">Don't have an account? <a th:href="@{/register}">Register here</a></p>
+            </form>
+
+        </div>
+    </div>
+</div>
+
+<!-- Bootstrap JS and Popper.js (required for Bootstrap) -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.7/dist/umd/popper.min.js"></script>
+<!-- Bootstrap JS -->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
